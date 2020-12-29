@@ -1,26 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
     android:id="@+id/grid_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
-
+    android:padding="0dp"
+    android:gravity="center"
     tools:context=".MainActivity">
 
-    <mobi.thru.clock.TimeView
-        android:id="@+id/hour_time_view"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:gravity="bottom"
+        android:layout_weight="1">
 
-    <mobi.thru.clock.TimeView
-        android:id="@+id/minute_time_view"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        />
+        <mobi.thru.clock.DigitView
+            android:id="@+id/hour_first"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+        <mobi.thru.clock.DigitView
+            android:id="@+id/hour_second"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="top"
+        >
+        <mobi.thru.clock.DigitView
+            android:id="@+id/minute_first"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+        <mobi.thru.clock.DigitView
+            android:id="@+id/minute_second"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 </LinearLayout>

@@ -7,7 +7,7 @@ import androidx.gridlayout.widget.GridLayout
 import kotlin.math.min
 
 
-class DigitView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : GridLayout(
+class DoubleDigitView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : GridLayout(
     context,
     attrs,
     defStyleAttr

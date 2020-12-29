@@ -5,13 +5,14 @@ import android.os.*
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.gridlayout.widget.GridLayout
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
-const val ROWS = 4
-const val COLS = 1
+
+const val ROWS = 2
+const val COLS = 2
 
 data class Time(val hour: Number, val minute: Number)
 
@@ -28,7 +29,7 @@ class MainActivity : Activity() {
         )
     }
 
-    lateinit var clockDrawables: Array<DigitView?>
+    lateinit var clockDrawables: Array<ClockView?>
     lateinit var gridLayout: GridLayout
 
 
@@ -40,7 +41,7 @@ class MainActivity : Activity() {
 
         // clock = findViewById(R.id.clocks)
         //Remove notification bar
-        hideBottomNavigationBar()
+        goFullScreen()
         // buildClockGrid()
         // startClock()
     }
@@ -55,7 +56,7 @@ class MainActivity : Activity() {
         for (row in 0 until ROWS) {
             for (col in 0 until COLS) {
 
-                val digit = DigitView(applicationContext)
+                val digit = ClockView(applicationContext)
 
                 // val clocks = ImageView(applicationContext)
 
@@ -160,7 +161,28 @@ class MainActivity : Activity() {
     }
 
 
-    private fun hideBottomNavigationBar() {
+    private fun goFullScreen() {
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            window.insetsController?.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+//            window.insetsController?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+//            window.setDecorFitsSystemWindows(false)
+//        } else {
+//            window.setFlags(
+//                @Suppress("DEPRECATION")
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                @Suppress("DEPRECATION")
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN
+//            )
+//            @Suppress("DEPRECATION")
+//            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            window.setDecorFitsSystemWindows(false)
+//        } else {
+//            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+//        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.let {
                 // Default behavior is that if navigation bar is hidden, the system will "steal" touches
@@ -179,6 +201,7 @@ class MainActivity : Activity() {
                 // and SYSTEM_UI_FLAG_FULLSCREEN.
                 it.hide(WindowInsets.Type.systemBars())
             }
+            window.setDecorFitsSystemWindows(false)
         } else {
             // Enables regular immersive mode.
             // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.

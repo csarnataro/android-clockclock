@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="ClockImageView">
+		<attr name="hours" format="float" />
+		<attr name="minutes" format="float" />
+<!--		<attr name="timeSetDuration" format="integer" />-->
+	</declare-styleable>
+</resources>
