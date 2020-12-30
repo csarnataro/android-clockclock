@@ -1,7 +1,5 @@
 package mobi.thru.clock
 
-import android.animation.Animator
-import android.animation.TimeInterpolator
 import android.content.Context
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
@@ -13,7 +11,6 @@ import android.util.AttributeSet
 
 class ClockImageView : androidx.appcompat.widget.AppCompatImageView, Animatable {
   private var clock = ClockDrawable(context)
-    private set
 
   var hours: Float
     get() = clock.hours

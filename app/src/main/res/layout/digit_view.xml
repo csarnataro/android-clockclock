@@ -18,7 +18,6 @@
         <mobi.thru.clock.ClockImageView
             android:id="@+id/clock_0_0"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
             />
@@ -26,7 +25,6 @@
         <mobi.thru.clock.ClockImageView
             android:id="@+id/clock_0_1"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
             />
@@ -42,14 +40,12 @@
         <mobi.thru.clock.ClockImageView
             android:id="@+id/clock_1_0"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
             />
         <mobi.thru.clock.ClockImageView
             android:id="@+id/clock_1_1"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
             />
@@ -66,7 +62,6 @@
         <mobi.thru.clock.ClockImageView
             android:id="@+id/clock_2_0"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
             />
@@ -74,7 +69,6 @@
         <mobi.thru.clock.ClockImageView
             android:id="@+id/clock_2_1"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
             />

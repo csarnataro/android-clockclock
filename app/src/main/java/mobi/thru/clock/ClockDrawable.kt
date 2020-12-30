@@ -1,21 +1,27 @@
 package mobi.thru.clock
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.Paint
+import android.content.res.Resources
+import android.graphics.*
+import android.graphics.BlurMaskFilter.Blur
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
+import android.view.View
 import android.widget.ImageView
+
 
 class ClockDrawable(private val ctx: Context?) : Drawable(), Animatable {
 
-    var index: Int = -1
-        set(value) {
-            field = value
-            invalidateSelf()
-        }
+    private val framePaint = basePaint(strokeWidth = 1F)
+
+    private val handsPaint = basePaint()
+
+    private val shadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        alpha = 100
+        strokeWidth = 3F
+        style = Paint.Style.STROKE;
+        maskFilter = BlurMaskFilter(12F, Blur.INNER)
+    }
 
     private var _minutes: Float = 7.5F
     var minutes: Float
@@ -33,40 +39,42 @@ class ClockDrawable(private val ctx: Context?) : Drawable(), Animatable {
             invalidateSelf()
         }
 
-    var paint = Paint().apply {
-        isAntiAlias = true
-        alpha = 255
-        color = Color.BLACK
-        style = Paint.Style.STROKE
-        strokeCap = Paint.Cap.ROUND
-        strokeJoin = Paint.Join.ROUND
-        strokeWidth = 5F // Stroke.THIN.toDip(ctx)
-    }
+//    var paint = Paint().apply {
+//        isAntiAlias = true
+//        alpha = 255
+//        color = Color.BLACK
+//        style = Paint.Style.STROKE
+//        strokeCap = Paint.Cap.ROUND
+//        strokeJoin = Paint.Join.ROUND
+//        strokeWidth = 5F // Stroke.THIN.toDip(ctx)
+//    }
 
     fun into(view: ImageView): ClockDrawable =
         ClockDrawable(ctx).apply { view.setImageDrawable(this) }
 
-
     override fun draw(canvas: Canvas) {
-        canvas.drawCircle(centerX, centerY, frameRadius, paint)
-        canvas.drawMinuteHand(centerX, centerY, minutes, frameRadius * 0.8F, paint)
-        canvas.drawHourHand(centerX, centerY, hours, frameRadius * 0.6F, paint)
-
-        if (index != -1) {
-            canvas.drawText(index.toString(), centerX + 10, centerY -10, paint)
-        }
+        drawFrame(canvas)
+        canvas.drawMinuteHand(centerX, centerY, minutes, frameRadius * 0.8F, handsPaint)
+        canvas.drawHourHand(centerX, centerY, hours, frameRadius * 0.6F, handsPaint)
     }
 
+    private fun drawFrame(canvas: Canvas) {
+        // Important for certain APIs
+        // setLayerType(LAYER_TYPE_SOFTWARE, paint);
+        canvas.drawCircle(centerX + 1, centerY + 1, frameRadius - 1, shadowPaint)
+        canvas.drawCircle(centerX, centerY, frameRadius, framePaint)
+    }
+
+
     override fun setAlpha(alpha: Int) {
-        paint.alpha = alpha
+        handsPaint.alpha = alpha
     }
 
     override fun setColorFilter(colorFilter: ColorFilter?) {
-        paint.colorFilter = colorFilter
+        handsPaint.colorFilter = colorFilter
     }
 
-
-    override fun getOpacity() = paint.alpha
+    override fun getOpacity() = handsPaint.alpha
 
     override fun start() {
         TODO("Not yet implemented")
@@ -89,5 +97,10 @@ class ClockDrawable(private val ctx: Context?) : Drawable(), Animatable {
     internal val Drawable.width: Int get() = bounds.width()
     internal val Drawable.centerX: Float get() = bounds.exactCenterX()
     internal val Drawable.centerY: Float get() = bounds.exactCenterY()
+
+    internal fun Resources.dip(value: Int): Int = (value * displayMetrics.density).toInt()
+
+    internal fun Context.dip(value: Int): Int = resources.dip(value)
+    internal fun View.dip(value: Int): Int = resources.dip(value)
 
 }

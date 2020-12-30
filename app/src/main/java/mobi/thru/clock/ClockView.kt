@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.ImageView
 import androidx.gridlayout.widget.GridLayout
 
@@ -21,7 +22,7 @@ class ClockView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Gr
 
 
     init {
-        println("****** In DigitView INIT ******")
+        Log.d("ClockView","****** In DigitView INIT ******")
         // inflate(context, R.layout.digit_view, this)
         // grid = findViewById(R.id.digit_view_grid)
         clocks = Array(24) {
