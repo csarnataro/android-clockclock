@@ -1,4 +1,4 @@
-package mobi.thru.clock
+package mobi.thru.clockclock
 
 import android.content.Context
 import android.util.AttributeSet
@@ -45,15 +45,25 @@ class DigitView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : Gr
     constructor(context: Context?) : this(context, null)
 
 
-    fun set(value: Int) {
+    fun set(value: Int, animate: Boolean = false) {
 
         val digits = getDigits(value)
-        with(clock_0_0) { hours = digits[0].hour; minutes = digits[0].minute }
-        with(clock_0_1) { hours = digits[1].hour; minutes = digits[1].minute }
-        with(clock_1_0) { hours = digits[2].hour; minutes = digits[2].minute }
-        with(clock_1_1) { hours = digits[3].hour; minutes = digits[3].minute }
-        with(clock_2_0) { hours = digits[4].hour; minutes = digits[4].minute }
-        with(clock_2_1) { hours = digits[5].hour; minutes = digits[5].minute }
+        if (animate) {
+            clock_0_0.animateToTime(digits[0].hour, digits[0].minute)
+            clock_0_0.animateToTime(digits[0].hour, digits[0].minute)
+            clock_0_1.animateToTime(digits[1].hour, digits[1].minute)
+            clock_1_0.animateToTime(digits[2].hour, digits[2].minute)
+            clock_1_1.animateToTime(digits[3].hour, digits[3].minute)
+            clock_2_0.animateToTime(digits[4].hour, digits[4].minute)
+            clock_2_1.animateToTime(digits[5].hour, digits[5].minute)
+        } else {
+            with(clock_0_0) { hours = digits[0].hour; minutes = digits[0].minute }
+            with(clock_0_1) { hours = digits[1].hour; minutes = digits[1].minute }
+            with(clock_1_0) { hours = digits[2].hour; minutes = digits[2].minute }
+            with(clock_1_1) { hours = digits[3].hour; minutes = digits[3].minute }
+            with(clock_2_0) { hours = digits[4].hour; minutes = digits[4].minute }
+            with(clock_2_1) { hours = digits[5].hour; minutes = digits[5].minute }
+        }
         invalidate()
     }
 

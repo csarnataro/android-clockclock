@@ -1,17 +1,16 @@
-package mobi.thru.clock
+package mobi.thru.clockclock
 
 import android.app.Activity
 import android.os.*
-import android.util.Log
 import android.view.*
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
-
 
 class MainActivity : Activity() {
 
     lateinit var hoursView: DoubleDigitView
     lateinit var minutesView: DoubleDigitView
+    var firstTime = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +20,8 @@ class MainActivity : Activity() {
         hoursView = findViewById(R.id.hours_view)
         minutesView = findViewById(R.id.minutes_view)
 
-        // clock = findViewById(R.id.clocks)
         //Remove notification bar
         goFullScreen()
-        // buildClockGrid()
         startClock()
     }
 
@@ -32,17 +29,27 @@ class MainActivity : Activity() {
     private fun startClock() {
         fixedRateTimer("timer", false, 0L, 1000) {
             this@MainActivity.runOnUiThread {
-                // tvTime.text = SimpleDateFormat("dd MMM - HH:mm", Locale.US).format(Date())
                 val c = Calendar.getInstance()
-                var hour = c.get(Calendar.HOUR_OF_DAY)
-                hour = if (hour > 12) hour - 12 else hour
-                var minute = c.get(Calendar.MINUTE)
-                var second = c.get(Calendar.SECOND)
-                Log.d("CLOCK", ">>>>>>> it's $hour:$minute:$second")
+                val second = c.get(Calendar.SECOND)
 
-                hoursView.set(hour)
-                minutesView.set(minute)
+                if (firstTime) {
+                    val hour = c.get(Calendar.HOUR_OF_DAY)
+                    // hour = if (hour > 12) hour - 12 else hour
+                    val minute = c.get(Calendar.MINUTE)
+                    hoursView.set(hour, true)
+                    minutesView.set(minute, true)
+                    firstTime = false
+                } else {
 
+                    if (second == 50) {
+                        c.add(Calendar.MINUTE, 1)
+                        val hour = c.get(Calendar.HOUR_OF_DAY)
+                        // hour = if (hour > 12) hour - 12 else hour
+                        val minute = c.get(Calendar.MINUTE)
+                        hoursView.set(hour, true)
+                        minutesView.set(minute, true)
+                    }
+                }
             }
         }
     }

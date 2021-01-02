@@ -1,4 +1,4 @@
-package mobi.thru.clock
+package mobi.thru.clockclock
 
 import android.content.Context
 import android.util.AttributeSet
@@ -10,14 +10,14 @@ class DoubleDigitView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int
     attrs,
     defStyleAttr
 ) {
-    fun set(value: Int) {
+    fun set(value: Int, animate: Boolean = false) {
         if (value >= 10) {
-            firstDigit.set(value/10)
-            secondDigit.set(value%10)
+            firstDigit.set(value/10, animate)
+            secondDigit.set(value%10, animate)
 
         } else {
-            firstDigit.set(0)
-            secondDigit.set(value)
+            firstDigit.set(0, animate)
+            secondDigit.set(value, animate)
         }
 
     }

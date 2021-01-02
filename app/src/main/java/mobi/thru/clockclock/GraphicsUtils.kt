@@ -1,4 +1,4 @@
-package mobi.thru.clock
+package mobi.thru.clockclock
 
 import android.graphics.Canvas
 import android.graphics.Color
@@ -29,11 +29,11 @@ internal fun Canvas.drawHourHand(centerX: Float, centerY: Float, hour: Float, le
     )
 }
 
-internal fun basePaint(strokeWidth: Float = 10F): Paint =
+internal fun paintOf(strokeWidth: Float = 20F, color: Int = Color.BLACK): Paint =
     Paint().apply {
-        isAntiAlias = true
-        color = Color.BLACK
+        this.color = color
         this.strokeWidth = strokeWidth
+        isAntiAlias = true
         style = Paint.Style.STROKE
         strokeCap = Paint.Cap.ROUND
         strokeJoin = Paint.Join.ROUND

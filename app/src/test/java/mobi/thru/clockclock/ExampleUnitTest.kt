@@ -1,4 +1,4 @@
-package mobi.thru.clock
+package mobi.thru.clockclock
 
 import org.junit.Test
 

@@ -7,17 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <mobi.thru.clock.DigitView
+    <mobi.thru.clockclock.DoubleDigitView
+        android:layout_gravity="center_vertical"
         android:id="@+id/hours_view"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         />
-    <mobi.thru.clock.DigitView
+    <mobi.thru.clockclock.DoubleDigitView
+        android:layout_gravity="center_vertical"
         android:id="@+id/minutes_view"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         />
 
 </LinearLayout>

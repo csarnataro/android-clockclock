@@ -1,7 +1,6 @@
-package mobi.thru.clock
+package mobi.thru.clockclock
 
 import android.content.Context
-import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 
@@ -9,7 +8,7 @@ import android.util.AttributeSet
  * Created by alex
  */
 
-class ClockImageView : androidx.appcompat.widget.AppCompatImageView, Animatable {
+class ClockImageView : androidx.appcompat.widget.AppCompatImageView /*, Animatable */ {
   private var clock = ClockDrawable(context)
 
   var hours: Float
@@ -67,11 +66,11 @@ class ClockImageView : androidx.appcompat.widget.AppCompatImageView, Animatable 
 //
 //  override fun animateIndeterminate() = clock.animateIndeterminate()
 
-  override fun isRunning() = clock.isRunning
-
-  override fun start() = clock.start()
-
-  override fun stop() = clock.stop()
+//  override fun isRunning() = clock.isRunning
+//
+//  override fun start() = clock.start()
+//
+//  override fun stop() = clock.stop()
 
   private fun inflateAttrs(attrs: AttributeSet) {
     val resAttrs = context.theme.obtainStyledAttributes(
@@ -86,5 +85,9 @@ class ClockImageView : androidx.appcompat.widget.AppCompatImageView, Animatable 
       minutes = getFloat(R.styleable.ClockImageView_minutes, minutes)
       recycle()
     }
+  }
+
+  fun animateToTime(hours: Float, minutes: Float) {
+    clock.animateToTime(hours, minutes)
   }
 }

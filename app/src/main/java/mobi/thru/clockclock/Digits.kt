@@ -1,4 +1,4 @@
-package mobi.thru.clock
+package mobi.thru.clockclock
 
 fun getDigits(value: Int): Array<Time> =
     when (value) {
